@@ -17,10 +17,16 @@ export const registerUser = (user, history) => dispatch => {
 export const loginUser = (user) => dispatch => {
     axios.post('/api/users/login', user)
             .then(res => {
+                console.log('usert act',user);
+                console.log('res',res);
                 const { token } = res.data;
+                console.log('token',token);
                 localStorage.setItem('jwtToken', token);
                 setAuthToken(token);
                 const decoded = jwt_decode(token);
+                localStorage.setItem('idUser', decoded.id);
+                console.log('decoded',decoded);
+                console.log('LocalS',localStorage);
                 dispatch(setCurrentUser(decoded));
             })
             .catch(err => {
@@ -40,6 +46,7 @@ export const setCurrentUser = decoded => {
 
 export const logoutUser = (history) => dispatch => {
     localStorage.removeItem('jwtToken');
+    localStorage.removeItem('idUser');
     setAuthToken(false);
     dispatch(setCurrentUser({}));
     history.push('/login');
