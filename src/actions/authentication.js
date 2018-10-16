@@ -1,9 +1,11 @@
 import axios from 'axios';
-import { GET_ERRORS, SET_CURRENT_USER } from './types';
+import { GET_ERRORS, SET_CURRENT_USER } from './types'; 
 import setAuthToken from '../setAuthToken';
 import jwt_decode from 'jwt-decode';
 
 export const registerUser = (user, history) => dispatch => {
+    console.log('[INFO-APP] ---- HISTORY----',history);
+    console.log('[INFO-APP] ---- USER-----', user);
     axios.post('/api/users/register', user)
             .then(res => history.push('/login'))
             .catch(err => {

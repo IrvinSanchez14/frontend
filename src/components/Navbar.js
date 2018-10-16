@@ -26,6 +26,9 @@ class Navbar extends Component {
                         style={{ width: '25px', marginRight: '5px'}} />
                             Logout
                 </a>
+                <li className="nav-item">
+                <Link className="nav-link" to="/tableData">Table</Link>
+            </li>
             </ul>
         )
       const guestLinks = (

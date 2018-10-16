@@ -10,6 +10,7 @@ import Navbar from './components/Navbar';
 import Register from './components/Register';
 import Login from './components/Login';
 import Home from './components/Home';
+import tableData from './components/TableData';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -38,6 +39,7 @@ class App extends Component {
                 <div className="container">
                   <Route exact path="/register" component={ Register } />
                   <Route exact path="/login" component={ Login } />
+                  <Route exact path="/tableData" component={ tableData } />
                 </div>
             </div>
           </Router>
