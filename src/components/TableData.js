@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { makeData } from "./Utils";
-import { GET_ERRORS } from '../actions/types'; 
 import axios from 'axios';
 
 // Import React Table
@@ -25,18 +24,9 @@ export default class tableData extends Component {
       }
 
       pruebaDatos = () => {
-        const registerUser = (user, history) => dispatch => {
-            console.log('[INFO-APP] ---- HISTORY----',history);
-            console.log('[INFO-APP] ---- USER-----', user);
-            axios.get('/api/users/me', user)
-                    .then(res => history.push('/tableData'))
-                    .catch(err => {
-                        dispatch({
-                            type: GET_ERRORS,
-                            payload: err.response.data
-                        });
-                    });
-        }
+        axios.post('/api/users/mongoq').then(res => {
+          console.log(res);
+        });
       }
 
       render() {
