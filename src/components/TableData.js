@@ -14,23 +14,17 @@ const styles = {
     },
 }
 
+
 export default class tableData extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
           data: makeData()
         };
       }
 
-      pruebaDatos = () => {
-        axios.post('/api/users/mongoq').then(res => {
-          console.log(res);
-        });
-      }
-
       render() {
-          console.log(this.pruebaDatos());
         const { data } = this.state;
         return (
           <div style={styles.base}>
@@ -42,34 +36,7 @@ export default class tableData extends Component {
                   columns: [
                     {
                       Header: "First Name",
-                      accessor: "firstName"
-                    },
-                    {
-                      Header: "Last Name",
-                      id: "lastName",
-                      accessor: d => d.lastName
-                    }
-                  ]
-                },
-                {
-                  Header: "Info",
-                  columns: [
-                    {
-                      Header: "Age",
-                      accessor: "age"
-                    },
-                    {
-                      Header: "Status",
-                      accessor: "status"
-                    }
-                  ]
-                },
-                {
-                  Header: 'Stats',
-                  columns: [
-                    {
-                      Header: "Visits",
-                      accessor: "visits"
+                      accessor: "name"
                     }
                   ]
                 }

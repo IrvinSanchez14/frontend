@@ -1,37 +1,23 @@
 import React from "react";
 import namor from "namor";
+import axios from 'axios';
 
-const range = len => {
-  const arr = [];
-  for (let i = 0; i < len; i++) {
-    arr.push(i);
-  }
-  return arr;
-};
+const datos = [];
 
-const newPerson = () => {
-  const statusChance = Math.random();
-  return {
-    firstName: namor.generate({ words: 1, numbers: 0 }),
-    lastName: namor.generate({ words: 1, numbers: 0 }),
-    age: Math.floor(Math.random() * 30),
-    visits: Math.floor(Math.random() * 100),
-    progress: Math.floor(Math.random() * 100),
-    status:
-      statusChance > 0.66
-        ? "relationship"
-        : statusChance > 0.33 ? "complicated" : "single"
-  };
-};
 
-export function makeData(len = 5553) {
-  return range(len).map(d => {
-    return {
-      ...newPerson(),
-      children: range(10).map(newPerson)
-    };
-  });
+export function makeData() {
+  axios.post('/api/users/mongoq').then(res => {
+    res.data.forEach(element => {
+      datos.push({
+       name: element.name,
+       email: element.email
+      });
+    });
+   });
+   return datos;
 }
+
+
 
 export const Logo = () =>
   <div style={{ margin: '1rem auto', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center'}}>
