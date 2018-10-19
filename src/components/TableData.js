@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
-import { makeData } from "./Utils";
 import axios from 'axios';
-
-// Import React Table
 import ReactTable from "react-table";
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import "react-table/react-table.css";
+
+// redux
+import { setUserInformation } from '../actions/actions';
+import { makeData } from './Utils';
+
 
 const styles = {
     base: {
@@ -12,24 +16,37 @@ const styles = {
       marginTop: '8px',
       margin: '1px',
     },
+    base2: {
+      display: 'inline',
+    },
 }
 
+class tableData extends Component {
 
-export default class tableData extends Component {
-
-    constructor(props) {
+      constructor(props) {
         super(props);
         this.state = {
-          data: makeData()
+          data: [],
+          isLoading: false,
+          error: null,
         };
       }
 
+      componentWillMount() {
+        axios.get('/api/users/tableData').then(res => {
+          this.setState({
+            data: res.data
+          });
+          this.props.setUserInformation(res.data);
+         });
+      }
+
       render() {
-        const { data } = this.state;
+
         return (
           <div style={styles.base}>
             <ReactTable
-              data={data}
+              data={this.state.data}
               columns={[
                 {
                   Header: "Name",
@@ -48,3 +65,23 @@ export default class tableData extends Component {
         );
       }
 }
+
+tableData.propTypes = {
+  setUserInformation: PropTypes.func.isRequired,
+};
+function mapDispatchToProps(dispatch) {
+  return {
+    setUserInformation: (information) =>
+      dispatch(setUserInformation(information)),
+    dispatch,
+  };
+}
+
+const mapStateToProps = (state, props) => ({
+  informationUser: setUserInformation(state, props),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(tableData);

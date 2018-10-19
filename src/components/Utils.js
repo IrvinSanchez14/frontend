@@ -1,20 +1,13 @@
 import React from "react";
-import namor from "namor";
 import axios from 'axios';
 
 const datos = [];
 
 
 export function makeData() {
-  axios.post('/api/users/mongoq').then(res => {
-    res.data.forEach(element => {
-      datos.push({
-       name: element.name,
-       email: element.email
-      });
-    });
-   });
-   return datos;
+    return {
+      type: datos,
+    }
 }
 
 

@@ -35,7 +35,6 @@ class Login extends Component {
 
     componentDidMount() {
         if(this.props.auth.isAuthenticated) {
-            console.log('this.props.history',this.props.history);
             this.props.history.push('/');
         }
     }

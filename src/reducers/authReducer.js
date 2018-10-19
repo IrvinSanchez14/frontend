@@ -7,11 +7,10 @@ const initialState = {
 }
 
 export default function(state = initialState, action ) {
+    console.log('[state auth reducer]\n ↳ ',state);
+    console.log('[action auth reducer]\n ↳ ',action);
     switch(action.type) {
         case SET_CURRENT_USER:
-        console.log('action',action);
-        console.log('state',state);
-        console.log('initialState',initialState);
             return {
                 ...state,
                 isAuthenticated: !isEmpty(action.payload),
@@ -19,5 +18,6 @@ export default function(state = initialState, action ) {
             }
         default: 
             return state;
+
     }
 }
