@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 //here components
 import "react-table/react-table.css";
+import Table from '../components/tablesInformation';
 //here redux files {reduces,action,selectors and sagas}
 import { setUserInformation } from "../actions/actions";
 //here declare firs const styles for all styles use in components or containers
@@ -19,6 +20,12 @@ const styles = {
     display: "inline"
   }
 };
+
+
+
+
+const cabeceras = [];
+
 class tableData extends Component {
   constructor(props) {
     super(props);
@@ -40,17 +47,23 @@ class tableData extends Component {
   }
 
   spanExample = () => {
-    return <span>hola</span>;
+    const header = [];
+    let cosas = {Header: "Name"};
+    header.push(cosas);
+    return header;
   }
 
   messageAlert = (information) => {
+    console.log('information', information);
+    console.log('info', Object.keys(information));
+    Object.keys(information).forEach((info) => console.log('info2',info))
     this.setState({
       span: true
     });
   };
 
   render() {
-    console.log(this.state.data);
+    console.log('cosas',this.spanExample());
     return (
       <div style={styles.base}>
         <ReactTable
@@ -79,7 +92,7 @@ class tableData extends Component {
           getTdProps={(state, rowInfo, column, instance) => {
             return {
               onClick: (e, handleOriginal) => {
-                this.messageAlert(rowInfo.original.name);
+                this.messageAlert(rowInfo.original);
                 if (handleOriginal) {
                   handleOriginal();
                 }
@@ -88,9 +101,9 @@ class tableData extends Component {
           }}
         />
         {!this.state.span ?(
-          <span>hola</span>
+          <span></span>
         ) : (
-          <span>adios</span>
+          <Table columns={this.spanExample()} data={cabeceras} />
         )}
       </div>
     );
