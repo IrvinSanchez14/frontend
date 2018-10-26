@@ -10,7 +10,7 @@ import Navbar from "./components/Navbar";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import Home from "./components/Home";
-import tableData from "./components/TableData";
+import tableData from "./containers/TablaDataUser";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 

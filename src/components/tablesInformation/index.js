@@ -9,10 +9,9 @@ import "react-table/react-table.css";
     base: {
       display: "inline",
       marginTop: "8px",
-      margin: "1px"
     },
     base2: {
-      display: "inline"
+      display: "inline",
     }
   };
 

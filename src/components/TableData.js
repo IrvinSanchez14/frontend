@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Radium from "radium";
 import axios from "axios";
 import ReactTable from "react-table";
 import PropTypes from "prop-types";
@@ -25,6 +24,7 @@ const styles = {
 
 
 const cabeceras = [];
+const header = [];
 
 class tableData extends Component {
   constructor(props) {
@@ -46,24 +46,21 @@ class tableData extends Component {
     });
   }
 
-  spanExample = () => {
-    const header = [];
-    let cosas = {Header: "Name"};
-    header.push(cosas);
-    return header;
-  }
+
 
   messageAlert = (information) => {
-    console.log('information', information);
-    console.log('info', Object.keys(information));
-    Object.keys(information).forEach((info) => console.log('info2',info))
     this.setState({
       span: true
-    });
+    })
+    Object.keys(information).forEach((info) => 
+      header.push({Header: info})
+    )
+    console.log('header',header)
+    return header;
   };
 
   render() {
-    console.log('cosas',this.spanExample());
+    console.log('header2',header)
     return (
       <div style={styles.base}>
         <ReactTable
@@ -103,7 +100,7 @@ class tableData extends Component {
         {!this.state.span ?(
           <span></span>
         ) : (
-          <Table columns={this.spanExample()} data={cabeceras} />
+          <Table columns={header} data={cabeceras} />
         )}
       </div>
     );
